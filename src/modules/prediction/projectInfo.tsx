@@ -1,9 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-type Props = object;
-
-const ProjectInfo = (props: Props) => {
+const ProjectInfo = () => {
   return (
     <>
       <div>

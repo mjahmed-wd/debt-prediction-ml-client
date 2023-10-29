@@ -1,8 +1,6 @@
 import React from 'react';
 
-type Props = object;
-
-const Footer = (props: Props) => {
+const Footer = () => {
   return (
     <>
       <hr />

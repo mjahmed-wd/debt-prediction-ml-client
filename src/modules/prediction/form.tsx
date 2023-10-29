@@ -1,8 +1,6 @@
 import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
 import * as Yup from 'yup';
 
-type Props = object;
-
 const initialData = {
   Address: 1,
   Schm_Desc: 1,
@@ -17,7 +15,7 @@ export const predictionValidationSchema = Yup.object().shape({
   Sanct_Lim: Yup.number().required('Required'),
 });
 
-const PredictionForm = (props: Props) => {
+const PredictionForm = () => {
   const handleSubmit = async (values: FormikValues) => {
     try {
       const response = await fetch('http://0.0.0.0:12345/predict', {
@@ -28,6 +26,7 @@ const PredictionForm = (props: Props) => {
         body: JSON.stringify(values),
       });
       const data = await response.json();
+      alert(data?.prediction);
       console.log(data);
     } catch (error) {
       console.log(error);
