@@ -10,13 +10,13 @@ const Header = () => {
           aria-label='Global'
         >
           <div className='flex items-center justify-between'>
-            <a
+            <Link
               className='flex-none text-xl font-semibold dark:text-white'
-              href='#'
+              href='/'
               aria-label='Brand'
             >
               debt.ai
-            </a>
+            </Link>
             <div className='sm:hidden'>
               <button
                 type='button'
@@ -54,13 +54,13 @@ const Header = () => {
             className='hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block'
           >
             <div className='flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:pl-7'>
-              <a
+              <Link
                 className='font-medium sm:py-6 text-blue-600'
-                href='#'
+                href='/'
                 aria-current='page'
               >
                 Home
-              </a>
+              </Link>
               <Link
                 className='font-medium text-gray-800 hover:text-gray-500 sm:py-6 dark:text-gray-200 dark:hover:text-gray-400'
                 href='/about'

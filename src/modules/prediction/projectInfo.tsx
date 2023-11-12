@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { MEMBERS } from 'pages/about';
 import React from 'react';
 
 const ProjectInfo = () => {
@@ -80,40 +80,15 @@ const ProjectInfo = () => {
 
         <div className='mt-10 flex items-center gap-x-5'>
           <div className='flex -space-x-2'>
-            <Image
-              className='inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800'
-              src='/assest/img/sayeed.jpeg'
-              alt='Image Description'
-              width={32}
-              height={32}
-            />
-            <img
-              className='inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800'
-              src='/assest/img/jubair.jpeg'
-              alt='Image Description'
-            />
-            <img
-              className='inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800'
-              src='https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80'
-              alt='Image Description'
-            />
-            <img
-              className='inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800'
-              src='https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80'
-              alt='Image Description'
-            />
-            <img
-              className='inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800'
-              src='https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80'
-              alt='Image Description'
-            />
-            <img
-              className='inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800'
-              src='https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=3&w=320&h=320&q=80'
-              alt='Image Description'
-            />
+            {MEMBERS.map((member) => (
+              <img
+                key={member.name}
+                className='inline-block h-8 w-8 rounded-full ring-2 ring-white dark:ring-gray-800'
+                src={member.img}
+                alt={`${member.name} - ${member.designation}`}
+              />
+            ))}
           </div>
-
           <span className='text-sm text-gray-500'>
             Developed by MIT, SUST student
           </span>

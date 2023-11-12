@@ -1,6 +1,6 @@
 import React from 'react';
 
-const members = [
+export const MEMBERS = [
   {
     name: 'Md Abu Sayed',
     designation: 'Team Leader',
@@ -63,7 +63,7 @@ const AboutUs = () => {
       </div>
 
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
-        {members.map((member) => (
+        {MEMBERS.map((member) => (
           <div
             key={member.name}
             className='flex flex-col rounded-xl p-4 md:p-6 bg-white border border-gray-200 dark:bg-slate-900 dark:border-gray-700'
