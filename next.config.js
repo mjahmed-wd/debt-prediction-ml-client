@@ -12,6 +12,6 @@ module.exports = withBundleAnalyzer({
   // So, the source code is "basePath-ready".
   // You can remove `basePath` if you don't need it.
   reactStrictMode: true,
-  content: ['node_modules/preline/dist/*.js'],
-  plugins: [require('preline/plugin')],
+  // content: ['node_modules/preline/dist/*.js'],
+  // plugins: [require('preline/plugin')],
 });

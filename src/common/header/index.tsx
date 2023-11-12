@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const Header = () => {
@@ -60,12 +61,12 @@ const Header = () => {
               >
                 Home
               </a>
-              <a
+              <Link
                 className='font-medium text-gray-800 hover:text-gray-500 sm:py-6 dark:text-gray-200 dark:hover:text-gray-400'
-                href='#'
+                href='/about'
               >
                 About Us
-              </a>
+              </Link>
               <a
                 className='font-medium text-gray-800 hover:text-gray-500 sm:py-6 dark:text-gray-200 dark:hover:text-gray-400'
                 href='#'
