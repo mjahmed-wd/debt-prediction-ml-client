@@ -1,7 +1,7 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import Footer from 'common/footer';
 import Header from 'common/header';
 import { Head, Html, Main, NextScript } from 'next/document';
-import Script from 'next/script';
 
 export default function Document() {
   return (
@@ -11,10 +11,11 @@ export default function Document() {
         <Header />
         <Main />
         <NextScript />
-        <Script
+        {/* <Script
           src='/node_modules/preline/dist/preline.js'
           strategy='lazyOnload'
-        />
+        /> */}
+        <script src='./node_modules/preline/dist/preline.js'></script>
         <Footer />
       </body>
     </Html>

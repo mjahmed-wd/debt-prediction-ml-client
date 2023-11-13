@@ -48,7 +48,7 @@ export const MEMBERS = [
     registrationNo: '202282212',
     img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=900&h=900&q=80',
     description:
-      'I am an ambitious workaholic, but apart from that, pretty simple person.',
+      'Skills : Programming language : javascript, python, react. Project contribution : deploy a machine learning model and find accuracy still working on',
   },
 ];
 
