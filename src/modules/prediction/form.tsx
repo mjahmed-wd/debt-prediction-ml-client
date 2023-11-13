@@ -18,12 +18,19 @@ export const predictionValidationSchema = Yup.object().shape({
 const PredictionForm = () => {
   const handleSubmit = async (values: FormikValues) => {
     try {
+      const modValue = {
+        ...values,
+        Address: parseInt(values.Address),
+        Schm_Desc: parseInt(values.Schm_Desc),
+        Rate: parseInt(values.Rate),
+        Sanct_Lim: parseInt(values.Sanct_Lim),
+      };
       const response = await fetch('http://127.0.0.1:12345/predict_knei', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(modValue),
       });
       const data = await response.json();
       alert(data?.prediction >= 5 ? 'Allowed for loan' : 'Doubtful');
