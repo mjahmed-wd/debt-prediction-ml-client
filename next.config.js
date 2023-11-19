@@ -13,9 +13,4 @@ module.exports = withBundleAnalyzer({
   // You can remove `basePath` if you don't need it.
   reactStrictMode: true,
   // content: ['node_modules/preline/dist/*.js'],
-  plugins: [require('preline/plugin')],
-  content: [
-    // './src/**/*.{html,js}',
-    'node_modules/preline/dist/*.js',
-  ],
 });

@@ -11,11 +11,6 @@ export default function Document() {
         <Header />
         <Main />
         <NextScript />
-        {/* <Script
-          src='/node_modules/preline/dist/preline.js'
-          strategy='lazyOnload'
-        /> */}
-        <script src='./node_modules/preline/dist/preline.js'></script>
         <Footer />
       </body>
     </Html>
