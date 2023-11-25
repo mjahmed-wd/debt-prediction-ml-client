@@ -1,13 +1,16 @@
-import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
+import Dropdown from 'common/form/dropdown';
+import Input from 'common/form/input';
+import { Form, Formik, FormikValues } from 'formik';
 import { PredictionModal } from 'modules/prediction/predictionModal';
 import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 
 const initialData = {
-  Address: 1,
-  Schm_Desc: 1,
+  Address: 'Amborkhana',
+  Schm_Desc: 'PERSONAL LOAN',
   Rate: 9,
   Sanct_Lim: 0,
+  Method: 'KN',
 };
 
 export const predictionValidationSchema = Yup.object().shape({
@@ -18,38 +21,29 @@ export const predictionValidationSchema = Yup.object().shape({
 });
 
 const PredictionForm = () => {
-  // const modal = new HSOverlay(
-  //   document.querySelector('#hs-basic-modal') as HTMLElement,
-  // );
+  const [allAddress, setAllAddress] = useState<string[]>([]);
+  const [allScheme, setAllScheme] = useState<string[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [prediction, setPrediction] = useState<{
+    result: string;
+    method: string;
+  }>({ result: '', method: '' });
 
-  // const openBtn = document.querySelector('#open-btn');
-
-  // openBtn?.addEventListener('click', () => {
-  //   modal.open();
-  // });
-
-  const [address, setAddress] = useState<string[]>([]);
-
-  console.log(address);
   const handleSubmit = async (values: FormikValues) => {
     try {
-      const modValue = {
-        ...values,
-        Address: parseInt(values.Address),
-        Schm_Desc: parseInt(values.Schm_Desc),
-        Rate: parseInt(values.Rate),
-        Sanct_Lim: parseInt(values.Sanct_Lim),
-      };
-      const response = await fetch('http://127.0.0.1:5000/predict', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        'http://127.0.0.1:5000/predict_from_real_field',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
         },
-        body: JSON.stringify(modValue),
-      });
+      );
       const data = await response.json();
-      alert(data?.prediction >= 5 ? 'Allowed for loan' : 'Doubtful');
-      console.log(data);
+      setPrediction(data.data);
+      setIsModalOpen(true);
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +58,22 @@ const PredictionForm = () => {
         },
       });
       const data = await response.json();
-      setAddress(data.data);
+      setAllAddress(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllScheme = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/get_schm_desc', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      setAllScheme(data.data);
     } catch (error) {
       console.log(error);
     }
@@ -72,6 +81,7 @@ const PredictionForm = () => {
 
   useEffect(() => {
     getAllAddress();
+    getAllScheme();
   }, []);
 
   return (
@@ -79,122 +89,32 @@ const PredictionForm = () => {
       <Formik
         enableReinitialize={true}
         initialValues={initialData}
-        validationSchema={predictionValidationSchema}
+        // validationSchema={predictionValidationSchema}
         validateOnChange={false}
         validateOnBlur={false}
         onSubmit={handleSubmit}
       >
         <Form>
           <div className='mt-6 grid gap-4 lg:gap-6'>
-            {/* <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
-              <div>
-                <label
-                  htmlFor='hs-firstname-hire-us-1'
-                  className='block text-sm text-gray-700 font-medium dark:text-white'
-                >
-                  First Name
-                </label>
-                <input
-                  type='text'
-                  name='hs-firstname-hire-us-1'
-                  id='hs-firstname-hire-us-1'
-                  className='py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor='hs-lastname-hire-us-1'
-                  className='block text-sm text-gray-700 font-medium dark:text-white'
-                >
-                  Last Name
-                </label>
-                <input
-                  type='text'
-                  name='hs-lastname-hire-us-1'
-                  id='hs-lastname-hire-us-1'
-                  className='py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
-                />
-              </div>
-            </div> */}
-
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
-              <div>
-                <label
-                  htmlFor='Address'
-                  className='block text-sm text-gray-700 font-medium dark:text-white'
-                >
-                  Address no
-                </label>
-                <Field
-                  type='number'
-                  name='Address'
-                  id='Address'
-                  className='py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
-                />
-                <ErrorMessage
-                  name='Address'
-                  render={(msg) => <span className='text-red-400'>{msg}</span>}
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor='Rate'
-                  className='block text-sm text-gray-700 font-medium dark:text-white'
-                >
-                  Loan Rate (%)
-                </label>
-                <Field
-                  type='text'
-                  name='Rate'
-                  id='Rate'
-                  className='py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
-                />
-                <ErrorMessage
-                  name='Rate'
-                  render={(msg) => <span className='text-red-400'>{msg}</span>}
-                />
-              </div>
+              <Dropdown dropdown={allAddress} name='Address' label='Address' />
+              <Dropdown
+                dropdown={allScheme}
+                name='Schm_Desc'
+                label='Scheme Description no'
+              />
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
-              <div>
-                <label
-                  htmlFor='Schm_Desc'
-                  className='block text-sm text-gray-700 font-medium dark:text-white'
-                >
-                  Scheme Description no
-                </label>
-                <Field
-                  type='number'
-                  name='Schm_Desc'
-                  id='Schm_Desc'
-                  className='py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
-                />
-                <ErrorMessage
-                  name='Schm_Desc'
-                  render={(msg) => <span className='text-red-400'>{msg}</span>}
-                />
-              </div>
+              <Input name='Rate' label='Rate' type='text' />
 
-              <div>
-                <label
-                  htmlFor='Sanct_Lim'
-                  className='block text-sm text-gray-700 font-medium dark:text-white'
-                >
-                  Sanction Limit
-                </label>
-                <Field
-                  type='text'
-                  name='Sanct_Lim'
-                  id='Sanct_Lim'
-                  className='py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
-                />
-                <ErrorMessage
-                  name='Sanct_Lim'
-                  render={(msg) => <span className='text-red-400'>{msg}</span>}
-                />
-              </div>
+              <Input name='Sanct_Lim' label='Sanction Limit' type='text' />
+            </div>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
+              <Dropdown
+                dropdown={['KN', 'Random Forest']}
+                name='Method'
+                label='Method'
+              />
             </div>
           </div>
 
@@ -208,7 +128,13 @@ const PredictionForm = () => {
           </div>
         </Form>
       </Formik>
-      <PredictionModal />
+      <PredictionModal
+        title='Title'
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        {prediction.result}
+      </PredictionModal>
     </>
   );
 };
