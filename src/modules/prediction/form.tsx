@@ -1,24 +1,11 @@
 import Dropdown from 'common/form/dropdown';
 import Input from 'common/form/input';
-import { Form, Formik, FormikValues } from 'formik';
+import { Form, Formik } from 'formik';
 import { PredictionModal } from 'modules/prediction/predictionModal';
+import { initialLoanQueryFormData } from 'modules/prediction/utils';
 import { useEffect, useState } from 'react';
-import * as Yup from 'yup';
-
-const initialData = {
-  Address: 'Amborkhana',
-  Schm_Desc: 'PERSONAL LOAN',
-  Rate: 9,
-  Sanct_Lim: 0,
-  Method: 'KN',
-};
-
-export const predictionValidationSchema = Yup.object().shape({
-  Address: Yup.number().required('Required'),
-  Schm_Desc: Yup.number().required('Required'),
-  Rate: Yup.number().required('Required'),
-  Sanct_Lim: Yup.number().required('Required'),
-});
+import predictionService from 'services/prediciton';
+import { PredictionPayload } from 'types/prediction';
 
 const PredictionForm = () => {
   const [allAddress, setAllAddress] = useState<string[]>([]);
@@ -29,19 +16,9 @@ const PredictionForm = () => {
     method: string;
   }>({ result: '', method: '' });
 
-  const handleSubmit = async (values: FormikValues) => {
+  const handleSubmit = async (values: PredictionPayload) => {
     try {
-      const response = await fetch(
-        'http://127.0.0.1:5000/predict_from_real_field',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(values),
-        },
-      );
-      const data = await response.json();
+      const { data } = await predictionService.postPredict(values);
       setPrediction(data.data);
       setIsModalOpen(true);
     } catch (error) {
@@ -51,13 +28,7 @@ const PredictionForm = () => {
 
   const getAllAddress = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/get_addresses', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await response.json();
+      const { data } = await predictionService.getAllDistrict();
       setAllAddress(data.data);
     } catch (error) {
       console.log(error);
@@ -66,18 +37,14 @@ const PredictionForm = () => {
 
   const getAllScheme = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/get_schm_desc', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await response.json();
+      const { data } = await predictionService.getAllScheme();
       setAllScheme(data.data);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handleModalClose = () => setIsModalOpen(false);
 
   useEffect(() => {
     getAllAddress();
@@ -88,7 +55,7 @@ const PredictionForm = () => {
     <>
       <Formik
         enableReinitialize={true}
-        initialValues={initialData}
+        initialValues={initialLoanQueryFormData}
         // validationSchema={predictionValidationSchema}
         validateOnChange={false}
         validateOnBlur={false}
@@ -131,7 +98,7 @@ const PredictionForm = () => {
       <PredictionModal
         title='Title'
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={handleModalClose}
       >
         {prediction.result}
       </PredictionModal>
