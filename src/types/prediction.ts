@@ -8,10 +8,17 @@ export enum PredictionMethod {
 }
 
 export type IPredictionField = {
-  Address: string;
-  Schm_Desc: string;
-  Rate: number;
-  Sanct_Lim: number;
+  Gender: string;
+  Married: string;
+  Dependents: string;
+  Education: string;
+  Self_Employed: string;
+  ApplicantIncome: number;
+  CoapplicantIncome: number;
+  LoanAmount: number;
+  Loan_Amount_Term: number;
+  Credit_History: number;
+  Property_Area: string;
 };
 
 type IPredictionMethod = {
