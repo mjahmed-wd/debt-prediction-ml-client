@@ -8,12 +8,13 @@ export default function PrelineScript() {
 
   useEffect(() => {
     import('preline/preline');
+    import('@preline/overlay');
   }, []);
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   HSStaticMethods.autoInit();
-    // }, 100);
+    setTimeout(() => {
+      // HSStaticMethods.autoInit();
+    }, 100);
   }, [path]);
 
   return null;

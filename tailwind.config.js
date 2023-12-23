@@ -4,9 +4,9 @@ module.exports = {
     './src/**/*.{html,js,ts,jsx,tsx}',
     'node_modules/preline/dist/*.js',
   ],
+  plugins: [require('preline/plugin')],
   theme: {
     extend: {},
   },
   darkMode: 'class',
-  plugins: [require('preline/plugin')],
 };
