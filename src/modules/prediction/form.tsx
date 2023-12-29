@@ -2,10 +2,10 @@ import DropdownSearch from 'common/form/dropdownSearch';
 import Input from 'common/form/input';
 import { Form, Formik } from 'formik';
 import { PredictionModal } from 'modules/prediction/predictionModal';
-import { initialLoanQueryFormData } from 'modules/prediction/utils';
+import { FIELDS, initialLoanQueryFormData } from 'modules/prediction/utils';
 import { useState } from 'react';
 import predictionService from 'services/prediciton';
-import { PredictionPayload } from 'types/prediction';
+import { PredictionMethod, PredictionPayload } from 'types/prediction';
 
 const PredictionForm = () => {
   const [allGender] = useState<string[]>(['Male', 'Female']);
@@ -15,10 +15,7 @@ const PredictionForm = () => {
   const [allPropertyArea] = useState<string[]>(['Urban', 'Rural', 'Semiurban']);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [prediction, setPrediction] = useState<{
-    result: string;
-    method: string;
-  }>({ result: '', method: '' });
+  const [prediction, setPrediction] = useState<string>('');
 
   const handleSubmit = async (values: PredictionPayload) => {
     try {
@@ -48,67 +45,78 @@ const PredictionForm = () => {
               {/* <Dropdown dropdown={allAddress} name='Address' label='Address' /> */}
               <DropdownSearch
                 dropdown={allGender}
-                name='Gender'
+                name={FIELDS.GENDER}
                 label='Gender'
               />
               <DropdownSearch
                 dropdown={allMaritalStatus}
-                name='Married'
+                name={FIELDS.MARRIED}
                 label='Married'
               />
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
               <DropdownSearch
                 dropdown={allEducationStatus}
-                name='Education'
+                name={FIELDS.EDUCATION}
                 label='Education'
               />
               <DropdownSearch
                 dropdown={selefEmploymentStatus}
-                name='Self_Employed'
+                name={FIELDS.SELF_EMPLOYED}
                 label='Self Employed'
               />
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
               <Input
-                name='ApplicantIncome'
+                name={FIELDS.APPLICANT_INCOME}
                 label='Applicant Income'
                 type='number'
               />
 
               <Input
-                name='CoapplicantIncome'
-                label='Sanction Limit'
-                type='text'
+                name={FIELDS.CO_APPLICANT_INCOME}
+                label='Co-Applicant Income'
+                type='number'
               />
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
-              <Input name='LoanAmount' label='Loan Amount' type='number' />
+              <Input
+                name={FIELDS.LOAN_AMOUNT}
+                label='Loan Amount'
+                type='number'
+              />
 
               <Input
-                name='Loan_Amount_Term'
+                name={FIELDS.LOAN_AMOUNT_TERM}
                 label='Loan Amount Term '
-                type='text'
+                type='number'
               />
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
               <Input
-                name='Credit_History'
+                name={FIELDS.CREDIT_HISTORY}
                 label='Credit History'
                 type='number'
               />
               <DropdownSearch
                 dropdown={allPropertyArea}
-                name='Property_Area'
+                name={FIELDS.PROPERTY_AREA}
                 label='Property Area'
               />
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
               <DropdownSearch
-                dropdown={['KN', 'Random Forest']}
-                name='Method'
-                label='Method'
+                dropdown={[
+                  PredictionMethod.KNNClassifier,
+                  PredictionMethod.LogisticRegression,
+                  PredictionMethod.NaiveBayes,
+                  PredictionMethod.RandomForestClassifier,
+                  PredictionMethod.SupportVectorClassifier,
+                ]}
+                name={FIELDS.SELECTED_MODEL}
+                label='Select Model'
               />
+              <Input name={FIELDS.DEPENDENT} label='Dependant' type='number' />
             </div>
           </div>
 
@@ -127,7 +135,7 @@ const PredictionForm = () => {
         isOpen={isModalOpen}
         onClose={handleModalClose}
       >
-        {prediction.result}
+        {prediction === 'Y' ? 'Loan Approved' : 'Loan Rejected'}
       </PredictionModal>
     </>
   );

@@ -1,28 +1,28 @@
 export enum PredictionMethod {
-  'KNN' = 'KNN',
-  'SVM' = 'SVM',
-  'RandomForest' = 'RandomForest',
-  'DecisionTree' = 'DecisionTree',
+  'KNNClassifier' = 'KNNClassifier',
   'LogisticRegression' = 'LogisticRegression',
   'NaiveBayes' = 'NaiveBayes',
+  'RandomForestClassifier' = 'RandomForestClassifier',
+  'SupportVectorClassifier' = 'SupportVectorClassifier',
 }
 
 export type IPredictionField = {
-  Gender: string;
-  Married: string;
-  Dependents: string;
-  Education: string;
-  Self_Employed: string;
-  ApplicantIncome: number;
-  CoapplicantIncome: number;
-  LoanAmount: number;
-  Loan_Amount_Term: number;
-  Credit_History: number;
-  Property_Area: string;
+  gender: string;
+  married: string;
+  dependents: string;
+  education: string;
+  self_employed: string;
+  applicantIncome: string;
+  coapplicant_income: string;
+  loan_amount: string;
+  loan_amount_term: string;
+  credit_history: string;
+  property_area: string;
+  selected_model: PredictionMethod.KNNClassifier;
 };
 
 type IPredictionMethod = {
-  Method: PredictionMethod;
+  selected_model: PredictionMethod;
 };
 
 export type PredictionPayload = IPredictionField & IPredictionMethod;
