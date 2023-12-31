@@ -11,20 +11,12 @@ export const MEMBERS = [
     I'm certified in CCNA, MTCNA, and MTCRE. I have strong networking and network automation knowledge. Now I'm a student at MIT in IICT at SUST. I'm leading the team on this project. I am also directly involved with the core development of this project.`,
   },
   {
-    name: 'Shushil Chandra Das',
-    designation: 'Business Analyst',
-    registrationNo: '202282212',
-    img: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=900&h=900&q=80',
+    name: 'Md Jubair. Ahmed',
+    designation: 'Programmer',
+    img: '/asset/img/jubair.jpeg',
+    registrationNo: '2022822001',
     description:
-      'I am an ambitious workaholic, but apart from that, pretty simple person.',
-  },
-  {
-    name: 'Rasendra Das',
-    designation: 'Business Analyst',
-    registrationNo: '202282212',
-    img: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=900&h=900&q=80',
-    description:
-      'I am an ambitious workaholic, but apart from that, pretty simple person.',
+      'Continuous learner, passionate about programming, and problem-solving and ready to take new challenges every single day. Having 2 years of experience in MERN stack development. ',
   },
   {
     name: 'Arnab Bhattacharjee',
@@ -35,20 +27,26 @@ export const MEMBERS = [
       'Most of my Work centers around Modeling and Training a Neural Network that could predict the Loan status. I Used python to build the Model. I also bring an understanding of HTML, CSS, and JavaScript in regards to the frontend side of the project.  ',
   },
   {
-    name: 'Md Jubair. Ahmed',
-    designation: 'Programmer',
-    img: '/asset/img/jubair.jpeg',
-    registrationNo: '202282212',
-    description:
-      'Continuous learner, passionate about programming, and problem-solving and ready to take new challenges every single day. Having 2 years of experience in MERN stack development. ',
-  },
-  {
     name: 'Fahmida Akter',
     designation: 'Programmer',
     registrationNo: '202282212',
-    img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=900&h=900&q=80',
+    img: '/asset/img/dp.jpeg',
     description:
       'Skills : Programming language : javascript, python, react. Project contribution : deploy a machine learning model and find accuracy still working on',
+  },
+  {
+    name: 'Shushil Chandra Das',
+    designation: 'Business Analyst',
+    registrationNo: '2022822XXX',
+    img: '/asset/img/dp.jpeg',
+    description: '',
+  },
+  {
+    name: 'Rasendra Das',
+    designation: 'Business Analyst',
+    registrationNo: '2022822XXX',
+    img: '/asset/img/dp.jpeg',
+    description: '',
   },
 ];
 
@@ -81,6 +79,9 @@ const AboutUs = () => {
                 <p className='text-xs uppercase text-gray-500'>
                   {member.designation}
                 </p>
+                <small className=' text-gray-500'>
+                  {member.registrationNo}
+                </small>
               </div>
             </div>
 

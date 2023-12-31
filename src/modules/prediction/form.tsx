@@ -11,7 +11,7 @@ const PredictionForm = () => {
   const [allGender] = useState<string[]>(['Male', 'Female']);
   const [allMaritalStatus] = useState<string[]>(['Yes', 'No']);
   const [allEducationStatus] = useState<string[]>(['Graduate', 'Not Graduate']);
-  const [selefEmploymentStatus] = useState<string[]>(['Yes', 'No']);
+  const [selectedEmploymentStatus] = useState<string[]>(['Yes', 'No']);
   const [allPropertyArea] = useState<string[]>(['Urban', 'Rural', 'Semiurban']);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -61,7 +61,7 @@ const PredictionForm = () => {
                 label='Education'
               />
               <DropdownSearch
-                dropdown={selefEmploymentStatus}
+                dropdown={selectedEmploymentStatus}
                 name={FIELDS.SELF_EMPLOYED}
                 label='Self Employed'
               />
@@ -131,7 +131,7 @@ const PredictionForm = () => {
         </Form>
       </Formik>
       <PredictionModal
-        title='Title'
+        title='Prediction Result'
         isOpen={isModalOpen}
         onClose={handleModalClose}
       >
