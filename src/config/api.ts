@@ -1,5 +1,5 @@
 export default {
-  API_URL: 'http://localhost:8000/',
+  API_URL: 'https://debt-api.onrender.com/',
   endpoints: {
     index: '/',
     get_schm_desc: '/get_schm_desc',
