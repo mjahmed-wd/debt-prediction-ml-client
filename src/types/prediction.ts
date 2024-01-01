@@ -19,11 +19,10 @@ export type IPredictionField = {
   loan_amount_term: string;
   credit_history: string;
   property_area: string;
-  selected_model: PredictionMethod.KNNClassifier;
 };
 
 type IPredictionMethod = {
-  selected_model: PredictionMethod;
+  selected_model: PredictionMethod[];
 };
 
 export type PredictionPayload = IPredictionField & IPredictionMethod;

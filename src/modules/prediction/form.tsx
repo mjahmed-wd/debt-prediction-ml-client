@@ -2,7 +2,11 @@ import DropdownSearch from 'common/form/dropdownSearch';
 import Input from 'common/form/input';
 import { Form, Formik } from 'formik';
 import { PredictionModal } from 'modules/prediction/predictionModal';
-import { FIELDS, initialLoanQueryFormData } from 'modules/prediction/utils';
+import {
+  FIELDS,
+  initialLoanQueryFormData,
+  predictionValidationSchema,
+} from 'modules/prediction/utils';
 import { useState } from 'react';
 import predictionService from 'services/prediciton';
 import { PredictionMethod, PredictionPayload } from 'types/prediction';
@@ -44,16 +48,12 @@ const PredictionForm = () => {
       <Formik
         enableReinitialize={true}
         initialValues={initialLoanQueryFormData}
-        // validationSchema={predictionValidationSchema}
-        validateOnChange={false}
-        validateOnBlur={false}
+        validationSchema={predictionValidationSchema}
         onSubmit={handleSubmit}
       >
         <Form>
-          {/*Credit_History,Property_Area */}
           <div className='mt-6 grid gap-4 lg:gap-6'>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
-              {/* <Dropdown dropdown={allAddress} name='Address' label='Address' /> */}
               <DropdownSearch
                 dropdown={allGender}
                 name={FIELDS.GENDER}

@@ -1,6 +1,6 @@
 'use client';
 import Label from 'common/label/label';
-import { FormikValues, useFormikContext } from 'formik';
+import { ErrorMessage, FormikValues, useFormikContext } from 'formik';
 import React from 'react';
 import { useState } from 'react';
 import Select from 'react-tailwindcss-select';
@@ -23,7 +23,7 @@ const DropdownSearch = (props: Props) => {
     label: item,
   }));
 
-  const { setFieldValue } = useFormikContext<FormikValues>();
+  const { touched, errors, setFieldValue } = useFormikContext<FormikValues>();
   const [value, setValue] = useState<SelectValue | null>(null);
 
   const handleChange = (value: SelectValue) => {
@@ -47,6 +47,12 @@ const DropdownSearch = (props: Props) => {
         primaryColor='black'
         isMultiple={isMultiple}
       />
+      {touched[name] && errors[name] && (
+        <ErrorMessage
+          name={name}
+          render={(msg) => <span className='text-red-400'>{msg}</span>}
+        />
+      )}
     </div>
   );
 };
