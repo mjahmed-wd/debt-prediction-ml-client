@@ -9,8 +9,8 @@ const ProjectInfo = () => {
           Debt Repayment Probability AI
         </h1>
         <p className='mt-1 md:text-lg text-gray-800 dark:text-gray-200'>
-          We use machine learning to predict your debt payment probability of a
-          customer.
+          We use machine learning to predict dept repayment probability of your
+          customers.
         </p>
 
         <div className='mt-8'>

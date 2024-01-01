@@ -11,6 +11,21 @@ export const MEMBERS = [
     I'm certified in CCNA, MTCNA, and MTCRE. I have strong networking and network automation knowledge. Now I'm a student at MIT in IICT at SUST. I'm leading the team on this project. I am also directly involved with the core development of this project.`,
   },
   {
+    name: 'Sushil Kumar Dash',
+    designation: 'Business Analyst',
+    registrationNo: '2022822028',
+    img: '/asset/img/sushil.jpeg',
+    description:
+      'I am Sushil Kumar Dash, presently working with Dutch-Bangla Bank PLC as Senior Assistant Vice President & Manager, Golapganj Brach, Sylhet. I was graduated from Shahjalal University of Science & Technology, Sylhet, Bangladesh at Mathematics in 1999.',
+  },
+  {
+    name: 'Rasendra Das',
+    designation: 'Business Analyst',
+    registrationNo: '2022822XXX',
+    img: '/asset/img/dp.jpeg',
+    description: '',
+  },
+  {
     name: 'Md Jubair. Ahmed',
     designation: 'Programmer',
     img: '/asset/img/jubair.jpeg',
@@ -33,20 +48,6 @@ export const MEMBERS = [
     img: '/asset/img/dp.jpeg',
     description:
       'Skills : Programming language : javascript, python, react. Project contribution : deploy a machine learning model and find accuracy still working on',
-  },
-  {
-    name: 'Shushil Chandra Das',
-    designation: 'Business Analyst',
-    registrationNo: '2022822XXX',
-    img: '/asset/img/dp.jpeg',
-    description: '',
-  },
-  {
-    name: 'Rasendra Das',
-    designation: 'Business Analyst',
-    registrationNo: '2022822XXX',
-    img: '/asset/img/dp.jpeg',
-    description: '',
   },
 ];
 

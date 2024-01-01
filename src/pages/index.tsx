@@ -11,7 +11,7 @@ export default function Home() {
           <div className='relative'>
             <div className='flex flex-col border rounded-xl p-4 sm:p-6 lg:p-10 dark:border-gray-700'>
               <h2 className='text-xl font-semibold text-gray-800 dark:text-gray-200'>
-                Fill in the user details
+                Fill in the customer details
               </h2>
 
               <PredictionForm />

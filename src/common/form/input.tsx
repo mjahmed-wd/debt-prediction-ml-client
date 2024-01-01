@@ -1,3 +1,4 @@
+import Label from 'common/label/label';
 import { ErrorMessage, Field } from 'formik';
 import React from 'react';
 
@@ -11,17 +12,12 @@ const Input = (props: Props) => {
   const { label, name, type, ...rest } = props;
   return (
     <div>
-      <label
-        htmlFor={name}
-        className='block text-sm text-gray-700 font-medium dark:text-white'
-      >
-        {label}
-      </label>
+      <Label name={name} label={label} />
       <Field
         type={type}
         name={name}
         id={name}
-        className='py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
+        className=' text-gray-500 border border-gray-300 shadow-sm transition-all duration-300 focus:outline-none bg-white hover:border-gray-400 focus:ring focus:ring-blue-500/20 py-2 px-4 block w-full rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400'
         {...rest}
       />
       <ErrorMessage

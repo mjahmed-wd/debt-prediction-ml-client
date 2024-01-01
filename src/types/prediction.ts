@@ -1,4 +1,5 @@
 export enum PredictionMethod {
+  'DecisionTreeClassifier' = 'DecisionTreeClassifier',
   'KNNClassifier' = 'KNNClassifier',
   'LogisticRegression' = 'LogisticRegression',
   'NaiveBayes' = 'NaiveBayes',

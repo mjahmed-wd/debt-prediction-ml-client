@@ -1,4 +1,5 @@
 'use client';
+import Label from 'common/label/label';
 import { FormikValues, useFormikContext } from 'formik';
 import React from 'react';
 import { useState } from 'react';
@@ -12,39 +13,39 @@ type Props = {
   dropdown: string[];
   name: string;
   label: string;
+  isMultiple?: boolean;
 };
 
 const DropdownSearch = (props: Props) => {
-  const { label, dropdown, name } = props;
+  const { label, dropdown, name, isMultiple = false } = props;
   const options: Option[] = dropdown.map((item) => ({
     value: item,
     label: item,
   }));
 
   const { setFieldValue } = useFormikContext<FormikValues>();
-  const [value, setValue] = useState<SelectValue>({ value: '', label: '' });
+  const [value, setValue] = useState<SelectValue | null>(null);
 
   const handleChange = (value: SelectValue) => {
     setValue(value);
-    if (value) {
+    if (isMultiple) {
+      const values = (value as Option[])?.map((item) => item.value!);
+      setFieldValue(name, values);
+    } else {
       setFieldValue(name, (value as Option).value!);
     }
   };
 
   return (
     <div>
-      <label
-        htmlFor={label}
-        className='block text-sm text-gray-700 font-medium dark:text-white'
-      >
-        {label}
-      </label>
+      <Label name={name} label={label} />
       <Select
         isSearchable={true}
         value={value}
         onChange={handleChange}
         options={options}
         primaryColor='black'
+        isMultiple={isMultiple}
       />
     </div>
   );
