@@ -6,6 +6,8 @@ export const MEMBERS = [
     designation: 'Team Leader',
     registrationNo: '2022822010',
     img: '/asset/img/sayed.png',
+    email: 'asayed106@gmail.com',
+    phone: '01728047826',
     description: `Hi, I'm MD ABU SAYED,
     I have done my PGD in IT at SUST. Also, I have almost 7 years of experience in networking.
     I'm certified in CCNA, MTCNA, and MTCRE. I have strong networking and network automation knowledge. Now I'm a student at MIT in IICT at SUST. I'm leading the team on this project. I am also directly involved with the core development of this project.`,
@@ -15,21 +17,27 @@ export const MEMBERS = [
     designation: 'Business Analyst',
     registrationNo: '2022822028',
     img: '/asset/img/sushil.jpeg',
+    email: 'skddbbl@gmail.com',
+    phone: '01711067267',
     description:
       'I am Sushil Kumar Dash, presently working with Dutch-Bangla Bank PLC as Senior Assistant Vice President & Manager, Golapganj Brach, Sylhet. I was graduated from Shahjalal University of Science & Technology, Sylhet, Bangladesh at Mathematics in 1999.',
   },
   {
-    name: 'Rasendra Das',
+    name: 'Rasendra Chandra Das',
     designation: 'Business Analyst',
-    registrationNo: '2022822XXX',
-    img: '/asset/img/dp.jpeg',
-    description: '',
+    registrationNo: '2022822026',
+    img: '/asset/img/rasendra.jpeg',
+    email: 'rasendra.sust@gmail.com',
+    phone: '01717930660',
+    description: 'Creating flowcharts, Graphs and Report writing',
   },
   {
     name: 'Md Jubair. Ahmed',
     designation: 'Programmer',
     img: '/asset/img/jubair.jpeg',
     registrationNo: '2022822001',
+    email: 'mdjubairahmed@gmail.com',
+    phone: '+8801782557441',
     description:
       'Continuous learner, passionate about programming, and problem-solving and ready to take new challenges every single day. Having 2 years of experience in MERN stack development. ',
   },
@@ -38,6 +46,8 @@ export const MEMBERS = [
     designation: 'Programmer',
     registrationNo: '2022822034',
     img: '/asset/img/arnab.jpeg',
+    email: 'arnabpial01@gmail.com',
+    phone: '+8801684505561',
     description:
       'Most of my Work centers around Modeling and Training a Neural Network that could predict the Loan status. I Used python to build the Model. I also bring an understanding of HTML, CSS, and JavaScript in regards to the frontend side of the project.  ',
   },
@@ -46,6 +56,8 @@ export const MEMBERS = [
     designation: 'Programmer',
     registrationNo: '202282212',
     img: '/asset/img/dp.jpeg',
+    email: 'afrinfahmida4@gmail.com',
+    phone: '+8801730460182',
     description:
       'Skills : Programming language : javascript, python, react. Project contribution : deploy a machine learning model and find accuracy still working on',
   },

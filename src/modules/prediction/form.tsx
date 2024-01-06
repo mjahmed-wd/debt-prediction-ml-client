@@ -167,10 +167,10 @@ const PredictionForm = () => {
               <tr key={index}>
                 <td className='px-6 py-4 whitespace-nowrap'>{item.model}</td>
                 <td className='px-6 py-4 whitespace-nowrap'>
-                  {item.accuracy_score}
+                  {parseFloat(item.accuracy_score).toFixed(2)}
                 </td>
                 <td className='px-6 py-4 whitespace-nowrap'>
-                  {item.precision_score}
+                  {parseFloat(item.precision_score).toFixed(2)}
                 </td>
                 <td className='px-6 py-4 whitespace-nowrap'>{item.result}</td>
               </tr>
