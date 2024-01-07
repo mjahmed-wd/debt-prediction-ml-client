@@ -122,6 +122,7 @@ const PredictionForm = () => {
                   PredictionMethod.NaiveBayes,
                   PredictionMethod.RandomForestClassifier,
                   PredictionMethod.SupportVectorClassifier,
+                  PredictionMethod.RandomForestRegressor,
                 ]}
                 name={FIELDS.SELECTED_MODEL}
                 isMultiple={true}

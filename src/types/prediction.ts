@@ -5,6 +5,7 @@ export enum PredictionMethod {
   'NaiveBayes' = 'NaiveBayes',
   'RandomForestClassifier' = 'RandomForestClassifier',
   'SupportVectorClassifier' = 'SupportVectorClassifier',
+  'RandomForestRegressor' = 'RandomForestRegressor',
 }
 
 export type IPredictionField = {
