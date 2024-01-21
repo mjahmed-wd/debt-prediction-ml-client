@@ -15,10 +15,10 @@ export type IPredictionField = {
   education: string;
   self_employed: string;
   applicantIncome: string;
-  coapplicant_income: string;
+  coapplicant_income: string | number;
   loan_amount: string;
-  loan_amount_term: string;
-  credit_history: string;
+  loan_amount_term: string | number;
+  credit_history: string | number;
   property_area: string;
 };
 

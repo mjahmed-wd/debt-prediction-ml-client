@@ -25,16 +25,35 @@ type IPrediction = {
 const PredictionForm = () => {
   const [allGender] = useState<string[]>(['Male', 'Female']);
   const [allMaritalStatus] = useState<string[]>(['Yes', 'No']);
+  const [allDependentList] = useState<string[]>(['0', '1', '2', '3', '3+']);
   const [allEducationStatus] = useState<string[]>(['Graduate', 'Not Graduate']);
   const [selectedEmploymentStatus] = useState<string[]>(['Yes', 'No']);
   const [allPropertyArea] = useState<string[]>(['Urban', 'Rural', 'Semiurban']);
+  const [allLoanAmountTerm] = useState<string[]>(['6', '9', '12']);
+  const [hsCheckboxDelete, setHsCheckboxDelete] = useState<boolean>(true);
+  const [allCreditHistory] = useState<string[]>([
+    'Satisfactory',
+    'Not Satisfactory',
+  ]);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [prediction, setPrediction] = useState<IPrediction[]>([]);
 
   const handleSubmit = async (values: PredictionPayload) => {
     try {
-      const { data } = await predictionService.postPredict(values);
+      const modifiedValues = {
+        ...values,
+        coapplicant_income: hsCheckboxDelete ? values?.coapplicant_income : 0,
+        loan_amount_term:
+          values?.loan_amount_term === '12'
+            ? 360
+            : values?.loan_amount_term === '9'
+              ? 180
+              : 120, //converted into days
+        credit_history: values.credit_history === 'Satisfactory' ? 1 : 0,
+      };
+      console.log(modifiedValues, values);
+      const { data } = await predictionService.postPredict(modifiedValues);
       setPrediction(data.data);
       setIsModalOpen(true);
     } catch (error) {
@@ -59,13 +78,17 @@ const PredictionForm = () => {
                 name={FIELDS.GENDER}
                 label='Gender'
               />
-              <Input name={FIELDS.DEPENDENT} label='Dependant' type='number' />
-            </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
               <DropdownSearch
                 dropdown={allMaritalStatus}
                 name={FIELDS.MARRIED}
                 label='Married'
+              />
+            </div>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
+              <DropdownSearch
+                dropdown={allDependentList}
+                name={FIELDS.DEPENDENT}
+                label='Dependant'
               />
               <DropdownSearch
                 dropdown={allEducationStatus}
@@ -85,31 +108,62 @@ const PredictionForm = () => {
                 type='number'
               />
             </div>
+
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
-              <Input
-                name={FIELDS.CO_APPLICANT_INCOME}
-                label='Co-Applicant Income'
-                type='number'
-              />
+              <div className='grid space-y-3'>
+                <div className='relative flex items-start'>
+                  <div className='flex items-center h-5 mt-1'>
+                    <input
+                      type='checkbox'
+                      id='hs-checkbox-delete'
+                      checked={hsCheckboxDelete}
+                      onChange={() => setHsCheckboxDelete(!hsCheckboxDelete)}
+                      className='border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800'
+                      aria-describedby='hs-checkbox-delete-description'
+                    />
+                  </div>
+                  <label htmlFor='hs-checkbox-delete' className='ms-3'>
+                    <span className='block text-sm font-semibold text-gray-800 dark:text-gray-300'>
+                      Co-Applicant Income
+                    </span>
+                    <span
+                      id='hs-checkbox-delete-description'
+                      className='block text-sm text-gray-600 dark:text-gray-500'
+                    >
+                      (Optional)
+                    </span>
+                  </label>
+                </div>
+              </div>
+              {hsCheckboxDelete === true && (
+                <Input
+                  name={FIELDS.CO_APPLICANT_INCOME}
+                  label='Co-Applicant Income'
+                  type='number'
+                />
+              )}
+            </div>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
               <Input
                 name={FIELDS.LOAN_AMOUNT}
                 label='Loan Amount'
                 type='number'
               />
-            </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
-              <Input
+              {/* <Input
+                  name={FIELDS.LOAN_AMOUNT_TERM}
+                  label='Loan Amount Term (Month)'
+                  type='number'
+                /> */}
+              <DropdownSearch
+                dropdown={allLoanAmountTerm}
                 name={FIELDS.LOAN_AMOUNT_TERM}
                 label='Loan Amount Term (Month)'
-                type='number'
               />
-              <Input
+              <DropdownSearch
+                dropdown={allCreditHistory}
                 name={FIELDS.CREDIT_HISTORY}
                 label='Credit History'
-                type='number'
               />
-            </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
               <DropdownSearch
                 dropdown={allPropertyArea}
                 name={FIELDS.PROPERTY_AREA}
@@ -117,12 +171,12 @@ const PredictionForm = () => {
               />
               <DropdownSearch
                 dropdown={[
-                  PredictionMethod.KNNClassifier,
-                  PredictionMethod.LogisticRegression,
-                  PredictionMethod.NaiveBayes,
+                  // PredictionMethod.KNNClassifier,
+                  // PredictionMethod.LogisticRegression,
+                  // PredictionMethod.NaiveBayes,
                   PredictionMethod.RandomForestClassifier,
-                  PredictionMethod.SupportVectorClassifier,
-                  PredictionMethod.RandomForestRegressor,
+                  // PredictionMethod.SupportVectorClassifier,
+                  // PredictionMethod.RandomForestRegressor,
                 ]}
                 name={FIELDS.SELECTED_MODEL}
                 isMultiple={true}
