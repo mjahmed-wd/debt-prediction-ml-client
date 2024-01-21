@@ -1,4 +1,4 @@
-import { PredictionPayload } from 'types/prediction';
+import { PredictionMethod, PredictionPayload } from 'types/prediction';
 import * as Yup from 'yup';
 
 export const FIELDS = {
@@ -28,7 +28,7 @@ export const initialLoanQueryFormData: PredictionPayload = {
   loan_amount_term: '',
   credit_history: '',
   property_area: '',
-  selected_model: [],
+  selected_model: [PredictionMethod.RandomForestClassifier],
 };
 
 export const predictionValidationSchema = Yup.object().shape({

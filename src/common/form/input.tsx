@@ -1,3 +1,4 @@
+import Tooltip from 'common/form/tooltip';
 import Label from 'common/label/label';
 import { ErrorMessage, Field, FormikValues, useFormikContext } from 'formik';
 import React from 'react';
@@ -5,15 +6,19 @@ import React from 'react';
 type Props = {
   name: string;
   label: string;
+  placeholder?: string;
   type: string;
 } & React.HTMLProps<HTMLInputElement>;
 
 const Input = (props: Props) => {
-  const { label, name, type, ...rest } = props;
+  const { label, name, type, placeholder, ...rest } = props;
   const { touched, errors } = useFormikContext<FormikValues>();
   return (
     <div>
-      <Label name={name} label={label} />
+      <div className='flex justify-between'>
+        <Label name={name} label={label} />
+        {placeholder && <Tooltip placeholder={placeholder} />}
+      </div>
       <Field
         type={type}
         name={name}

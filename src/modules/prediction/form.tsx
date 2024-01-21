@@ -29,8 +29,9 @@ const PredictionForm = () => {
   const [allEducationStatus] = useState<string[]>(['Graduate', 'Not Graduate']);
   const [selectedEmploymentStatus] = useState<string[]>(['Yes', 'No']);
   const [allPropertyArea] = useState<string[]>(['Urban', 'Rural', 'Semiurban']);
-  const [allLoanAmountTerm] = useState<string[]>(['6', '9', '12']);
-  const [hsCheckboxDelete, setHsCheckboxDelete] = useState<boolean>(true);
+  const [hsCheckboxDelete, setHsCheckboxDelete] = useState<boolean>(false);
+  const [additionalConfiguration, setAdditionalConfiguration] =
+    useState<boolean>(false);
   const [allCreditHistory] = useState<string[]>([
     'Satisfactory',
     'Not Satisfactory',
@@ -44,12 +45,13 @@ const PredictionForm = () => {
       const modifiedValues = {
         ...values,
         coapplicant_income: hsCheckboxDelete ? values?.coapplicant_income : 0,
-        loan_amount_term:
-          values?.loan_amount_term === '12'
-            ? 360
-            : values?.loan_amount_term === '9'
-              ? 180
-              : 120, //converted into days
+        loan_amount: (parseInt(values?.loan_amount) / 1000).toString(),
+        // loan_amount_term:
+        //   values?.loan_amount_term === '12'
+        //     ? 360
+        //     : values?.loan_amount_term === '9'
+        //       ? 180
+        //       : 120, //converted into days
         credit_history: values.credit_history === 'Satisfactory' ? 1 : 0,
       };
       console.log(modifiedValues, values);
@@ -77,11 +79,13 @@ const PredictionForm = () => {
                 dropdown={allGender}
                 name={FIELDS.GENDER}
                 label='Gender'
+                placeholder='x'
               />
               <DropdownSearch
                 dropdown={allMaritalStatus}
                 name={FIELDS.MARRIED}
                 label='Married'
+                placeholder='x'
               />
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
@@ -89,11 +93,13 @@ const PredictionForm = () => {
                 dropdown={allDependentList}
                 name={FIELDS.DEPENDENT}
                 label='Dependant'
+                placeholder='x'
               />
               <DropdownSearch
                 dropdown={allEducationStatus}
                 name={FIELDS.EDUCATION}
                 label='Education'
+                placeholder='x'
               />
             </div>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
@@ -101,11 +107,13 @@ const PredictionForm = () => {
                 dropdown={selectedEmploymentStatus}
                 name={FIELDS.SELF_EMPLOYED}
                 label='Self Employed'
+                placeholder='x'
               />
               <Input
                 name={FIELDS.APPLICANT_INCOME}
                 label='Applicant Income'
                 type='number'
+                placeholder='x'
               />
             </div>
 
@@ -124,7 +132,7 @@ const PredictionForm = () => {
                   </div>
                   <label htmlFor='hs-checkbox-delete' className='ms-3'>
                     <span className='block text-sm font-semibold text-gray-800 dark:text-gray-300'>
-                      Co-Applicant Income
+                      Co-Applicant
                     </span>
                     <span
                       id='hs-checkbox-delete-description'
@@ -148,40 +156,71 @@ const PredictionForm = () => {
                 name={FIELDS.LOAN_AMOUNT}
                 label='Loan Amount'
                 type='number'
+                placeholder='In Thousands'
               />
-              {/* <Input
-                  name={FIELDS.LOAN_AMOUNT_TERM}
-                  label='Loan Amount Term (Month)'
-                  type='number'
-                /> */}
-              <DropdownSearch
-                dropdown={allLoanAmountTerm}
+              <Input
                 name={FIELDS.LOAN_AMOUNT_TERM}
                 label='Loan Amount Term (Month)'
+                type='number'
+                placeholder='In months, minimum 6 months, maximum 360 months'
               />
               <DropdownSearch
                 dropdown={allCreditHistory}
                 name={FIELDS.CREDIT_HISTORY}
                 label='Credit History'
+                placeholder='x'
               />
               <DropdownSearch
                 dropdown={allPropertyArea}
                 name={FIELDS.PROPERTY_AREA}
                 label='Property Area'
+                placeholder='x'
               />
-              <DropdownSearch
-                dropdown={[
-                  // PredictionMethod.KNNClassifier,
-                  // PredictionMethod.LogisticRegression,
-                  // PredictionMethod.NaiveBayes,
-                  PredictionMethod.RandomForestClassifier,
-                  // PredictionMethod.SupportVectorClassifier,
-                  // PredictionMethod.RandomForestRegressor,
-                ]}
-                name={FIELDS.SELECTED_MODEL}
-                isMultiple={true}
-                label='Select Model'
-              />
+            </div>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
+              <div className='grid space-y-3'>
+                <div className='relative flex items-start'>
+                  <div className='flex items-center h-5 mt-1'>
+                    <input
+                      type='checkbox'
+                      id='hs-additional-configuration'
+                      checked={additionalConfiguration}
+                      onChange={() =>
+                        setAdditionalConfiguration(!additionalConfiguration)
+                      }
+                      className='border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800'
+                      aria-describedby='hs-additional-configuration-description'
+                    />
+                  </div>
+                  <label htmlFor='hs-additional-configuration' className='ms-3'>
+                    <span className='block text-sm font-semibold text-gray-800 dark:text-gray-300'>
+                      Additional Configuration
+                    </span>
+                    <span
+                      id='hs-additional-configuration-description'
+                      className='block text-sm text-gray-600 dark:text-gray-500'
+                    >
+                      (Optional)
+                    </span>
+                  </label>
+                </div>
+              </div>
+              {additionalConfiguration === true && (
+                <DropdownSearch
+                  dropdown={[
+                    // PredictionMethod.KNNClassifier,
+                    // PredictionMethod.LogisticRegression,
+                    // PredictionMethod.NaiveBayes,
+                    PredictionMethod.RandomForestClassifier,
+                    // PredictionMethod.SupportVectorClassifier,
+                    // PredictionMethod.RandomForestRegressor,
+                  ]}
+                  placeholder='Select Model'
+                  name={FIELDS.SELECTED_MODEL}
+                  isMultiple={true}
+                  label='Select Model'
+                />
+              )}
             </div>
           </div>
 

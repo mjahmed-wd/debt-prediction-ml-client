@@ -9,6 +9,7 @@ export default function PrelineScript() {
   useEffect(() => {
     import('preline/preline');
     import('@preline/overlay');
+    import('@preline/tooltip');
   }, []);
 
   useEffect(() => {

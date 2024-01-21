@@ -1,4 +1,5 @@
 'use client';
+import Tooltip from 'common/form/tooltip';
 import Label from 'common/label/label';
 import { ErrorMessage, FormikValues, useFormikContext } from 'formik';
 import React from 'react';
@@ -14,10 +15,11 @@ type Props = {
   name: string;
   label: string;
   isMultiple?: boolean;
+  placeholder?: string;
 };
 
 const DropdownSearch = (props: Props) => {
-  const { label, dropdown, name, isMultiple = false } = props;
+  const { label, dropdown, name, placeholder, isMultiple = false } = props;
   const options: Option[] = dropdown.map((item) => ({
     value: item,
     label: item,
@@ -38,7 +40,10 @@ const DropdownSearch = (props: Props) => {
 
   return (
     <div>
-      <Label name={name} label={label} />
+      <div className='flex justify-between'>
+        <Label name={name} label={label} />
+        {placeholder && <Tooltip placeholder={placeholder} />}
+      </div>
       <Select
         isSearchable={true}
         value={value}
