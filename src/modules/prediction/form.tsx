@@ -80,13 +80,13 @@ const PredictionForm = () => {
                   dropdown={allGender}
                   name={FIELDS.GENDER}
                   label='Gender'
-                  placeholder='x'
+                  placeholder='Enter gender'
                 />
                 <DropdownSearch
                   dropdown={allMaritalStatus}
                   name={FIELDS.MARRIED}
                   label='Married'
-                  placeholder='x'
+                  placeholder='Enter marital status'
                 />
               </div>
               <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
@@ -94,13 +94,13 @@ const PredictionForm = () => {
                   dropdown={allDependentList}
                   name={FIELDS.DEPENDENT}
                   label='Dependant'
-                  placeholder='x'
+                  placeholder='Enter number of dependant'
                 />
                 <DropdownSearch
                   dropdown={allEducationStatus}
                   name={FIELDS.EDUCATION}
                   label='Education'
-                  placeholder='x'
+                  placeholder='Enter educational qualification'
                 />
               </div>
               <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
@@ -108,13 +108,13 @@ const PredictionForm = () => {
                   dropdown={selectedEmploymentStatus}
                   name={FIELDS.SELF_EMPLOYED}
                   label='Self Employed'
-                  placeholder='x'
+                  placeholder='Enter employment status'
                 />
                 <Input
                   name={FIELDS.APPLICANT_INCOME}
-                  label='Applicant Income'
+                  label='Applicant Income (Monthly)'
                   type='number'
-                  placeholder='x'
+                  placeholder='Enter applicant income'
                 />
               </div>
 
@@ -147,7 +147,7 @@ const PredictionForm = () => {
                 {hsCheckboxDelete === true && (
                   <Input
                     name={FIELDS.CO_APPLICANT_INCOME}
-                    label='Co-Applicant Income'
+                    label='Co-Applicant Income (Monthly)'
                     type='number'
                     onBlur={(e) => {
                       if (e.target.value === '') {
@@ -155,6 +155,7 @@ const PredictionForm = () => {
                         setFieldValue(FIELDS.CO_APPLICANT_INCOME, 0, true);
                       }
                     }}
+                    placeholder='Enter co-applicant income'
                   />
                 )}
               </div>
@@ -169,19 +170,19 @@ const PredictionForm = () => {
                   name={FIELDS.LOAN_AMOUNT_TERM}
                   label='Loan Amount Term (Month)'
                   type='number'
-                  placeholder='In months, minimum 6 months, maximum 360 months'
+                  placeholder='In months, minimum 4 months, maximum 480 months'
                 />
                 <DropdownSearch
                   dropdown={allCreditHistory}
                   name={FIELDS.CREDIT_HISTORY}
                   label='Credit History'
-                  placeholder='x'
+                  placeholder='Enter users previous credit history'
                 />
                 <DropdownSearch
                   dropdown={allPropertyArea}
                   name={FIELDS.PROPERTY_AREA}
                   label='Property Area'
-                  placeholder='x'
+                  placeholder='Where is supporting property located?'
                 />
               </div>
               <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
