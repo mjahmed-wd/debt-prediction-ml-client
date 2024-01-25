@@ -72,167 +72,178 @@ const PredictionForm = () => {
         validationSchema={predictionValidationSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
-          <div className='mt-6 grid gap-4 lg:gap-6'>
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
-              <DropdownSearch
-                dropdown={allGender}
-                name={FIELDS.GENDER}
-                label='Gender'
-                placeholder='x'
-              />
-              <DropdownSearch
-                dropdown={allMaritalStatus}
-                name={FIELDS.MARRIED}
-                label='Married'
-                placeholder='x'
-              />
-            </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
-              <DropdownSearch
-                dropdown={allDependentList}
-                name={FIELDS.DEPENDENT}
-                label='Dependant'
-                placeholder='x'
-              />
-              <DropdownSearch
-                dropdown={allEducationStatus}
-                name={FIELDS.EDUCATION}
-                label='Education'
-                placeholder='x'
-              />
-            </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
-              <DropdownSearch
-                dropdown={selectedEmploymentStatus}
-                name={FIELDS.SELF_EMPLOYED}
-                label='Self Employed'
-                placeholder='x'
-              />
-              <Input
-                name={FIELDS.APPLICANT_INCOME}
-                label='Applicant Income'
-                type='number'
-                placeholder='x'
-              />
-            </div>
-
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
-              <div className='grid space-y-3'>
-                <div className='relative flex items-start'>
-                  <div className='flex items-center h-5 mt-1'>
-                    <input
-                      type='checkbox'
-                      id='hs-checkbox-delete'
-                      checked={hsCheckboxDelete}
-                      onChange={() => setHsCheckboxDelete(!hsCheckboxDelete)}
-                      className='border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800'
-                      aria-describedby='hs-checkbox-delete-description'
-                    />
-                  </div>
-                  <label htmlFor='hs-checkbox-delete' className='ms-3'>
-                    <span className='block text-sm font-semibold text-gray-800 dark:text-gray-300'>
-                      Co-Applicant
-                    </span>
-                    <span
-                      id='hs-checkbox-delete-description'
-                      className='block text-sm text-gray-600 dark:text-gray-500'
-                    >
-                      (Optional)
-                    </span>
-                  </label>
-                </div>
-              </div>
-              {hsCheckboxDelete === true && (
-                <Input
-                  name={FIELDS.CO_APPLICANT_INCOME}
-                  label='Co-Applicant Income'
-                  type='number'
-                />
-              )}
-            </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
-              <Input
-                name={FIELDS.LOAN_AMOUNT}
-                label='Loan Amount'
-                type='number'
-                placeholder='In Thousands'
-              />
-              <Input
-                name={FIELDS.LOAN_AMOUNT_TERM}
-                label='Loan Amount Term (Month)'
-                type='number'
-                placeholder='In months, minimum 6 months, maximum 360 months'
-              />
-              <DropdownSearch
-                dropdown={allCreditHistory}
-                name={FIELDS.CREDIT_HISTORY}
-                label='Credit History'
-                placeholder='x'
-              />
-              <DropdownSearch
-                dropdown={allPropertyArea}
-                name={FIELDS.PROPERTY_AREA}
-                label='Property Area'
-                placeholder='x'
-              />
-            </div>
-            <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
-              <div className='grid space-y-3'>
-                <div className='relative flex items-start'>
-                  <div className='flex items-center h-5 mt-1'>
-                    <input
-                      type='checkbox'
-                      id='hs-additional-configuration'
-                      checked={additionalConfiguration}
-                      onChange={() =>
-                        setAdditionalConfiguration(!additionalConfiguration)
-                      }
-                      className='border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800'
-                      aria-describedby='hs-additional-configuration-description'
-                    />
-                  </div>
-                  <label htmlFor='hs-additional-configuration' className='ms-3'>
-                    <span className='block text-sm font-semibold text-gray-800 dark:text-gray-300'>
-                      Additional Configuration
-                    </span>
-                    <span
-                      id='hs-additional-configuration-description'
-                      className='block text-sm text-gray-600 dark:text-gray-500'
-                    >
-                      (Optional)
-                    </span>
-                  </label>
-                </div>
-              </div>
-              {additionalConfiguration === true && (
+        {({ setFieldValue }) => (
+          <Form>
+            <div className='mt-6 grid gap-4 lg:gap-6'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
                 <DropdownSearch
-                  dropdown={[
-                    // PredictionMethod.KNNClassifier,
-                    // PredictionMethod.LogisticRegression,
-                    // PredictionMethod.NaiveBayes,
-                    PredictionMethod.RandomForestClassifier,
-                    // PredictionMethod.SupportVectorClassifier,
-                    // PredictionMethod.RandomForestRegressor,
-                  ]}
-                  placeholder='Select Model'
-                  name={FIELDS.SELECTED_MODEL}
-                  isMultiple={true}
-                  label='Select Model'
+                  dropdown={allGender}
+                  name={FIELDS.GENDER}
+                  label='Gender'
+                  placeholder='x'
                 />
-              )}
-            </div>
-          </div>
+                <DropdownSearch
+                  dropdown={allMaritalStatus}
+                  name={FIELDS.MARRIED}
+                  label='Married'
+                  placeholder='x'
+                />
+              </div>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
+                <DropdownSearch
+                  dropdown={allDependentList}
+                  name={FIELDS.DEPENDENT}
+                  label='Dependant'
+                  placeholder='x'
+                />
+                <DropdownSearch
+                  dropdown={allEducationStatus}
+                  name={FIELDS.EDUCATION}
+                  label='Education'
+                  placeholder='x'
+                />
+              </div>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
+                <DropdownSearch
+                  dropdown={selectedEmploymentStatus}
+                  name={FIELDS.SELF_EMPLOYED}
+                  label='Self Employed'
+                  placeholder='x'
+                />
+                <Input
+                  name={FIELDS.APPLICANT_INCOME}
+                  label='Applicant Income'
+                  type='number'
+                  placeholder='x'
+                />
+              </div>
 
-          <div className='mt-6 grid'>
-            <button
-              type='submit'
-              className='inline-flex justify-center items-center gap-x-3 text-center bg-blue-600 hover:bg-blue-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800'
-            >
-              Send Inquiry
-            </button>
-          </div>
-        </Form>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
+                <div className='grid space-y-3'>
+                  <div className='relative flex items-start'>
+                    <div className='flex items-center h-5 mt-1'>
+                      <input
+                        type='checkbox'
+                        id='hs-checkbox-delete'
+                        checked={hsCheckboxDelete}
+                        onChange={() => setHsCheckboxDelete(!hsCheckboxDelete)}
+                        className='border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800'
+                        aria-describedby='hs-checkbox-delete-description'
+                      />
+                    </div>
+                    <label htmlFor='hs-checkbox-delete' className='ms-3'>
+                      <span className='block text-sm font-semibold text-gray-800 dark:text-gray-300'>
+                        Co-Applicant
+                      </span>
+                      <span
+                        id='hs-checkbox-delete-description'
+                        className='block text-sm text-gray-600 dark:text-gray-500'
+                      >
+                        (Optional)
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                {hsCheckboxDelete === true && (
+                  <Input
+                    name={FIELDS.CO_APPLICANT_INCOME}
+                    label='Co-Applicant Income'
+                    type='number'
+                    onBlur={(e) => {
+                      if (e.target.value === '') {
+                        setHsCheckboxDelete(false);
+                        setFieldValue(FIELDS.CO_APPLICANT_INCOME, 0, true);
+                      }
+                    }}
+                  />
+                )}
+              </div>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
+                <Input
+                  name={FIELDS.LOAN_AMOUNT}
+                  label='Loan Amount'
+                  type='number'
+                  placeholder='In Thousands'
+                />
+                <Input
+                  name={FIELDS.LOAN_AMOUNT_TERM}
+                  label='Loan Amount Term (Month)'
+                  type='number'
+                  placeholder='In months, minimum 6 months, maximum 360 months'
+                />
+                <DropdownSearch
+                  dropdown={allCreditHistory}
+                  name={FIELDS.CREDIT_HISTORY}
+                  label='Credit History'
+                  placeholder='x'
+                />
+                <DropdownSearch
+                  dropdown={allPropertyArea}
+                  name={FIELDS.PROPERTY_AREA}
+                  label='Property Area'
+                  placeholder='x'
+                />
+              </div>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6'>
+                <div className='grid space-y-3'>
+                  <div className='relative flex items-start'>
+                    <div className='flex items-center h-5 mt-1'>
+                      <input
+                        type='checkbox'
+                        id='hs-additional-configuration'
+                        checked={additionalConfiguration}
+                        onChange={() =>
+                          setAdditionalConfiguration(!additionalConfiguration)
+                        }
+                        className='border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800'
+                        aria-describedby='hs-additional-configuration-description'
+                      />
+                    </div>
+                    <label
+                      htmlFor='hs-additional-configuration'
+                      className='ms-3'
+                    >
+                      <span className='block text-sm font-semibold text-gray-800 dark:text-gray-300'>
+                        Additional Configuration
+                      </span>
+                      <span
+                        id='hs-additional-configuration-description'
+                        className='block text-sm text-gray-600 dark:text-gray-500'
+                      >
+                        (Optional)
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                {additionalConfiguration === true && (
+                  <DropdownSearch
+                    dropdown={[
+                      // PredictionMethod.KNNClassifier,
+                      // PredictionMethod.LogisticRegression,
+                      // PredictionMethod.NaiveBayes,
+                      PredictionMethod.RandomForestClassifier,
+                      // PredictionMethod.SupportVectorClassifier,
+                      // PredictionMethod.RandomForestRegressor,
+                    ]}
+                    placeholder='Select Model'
+                    name={FIELDS.SELECTED_MODEL}
+                    isMultiple={true}
+                    label='Select Model'
+                  />
+                )}
+              </div>
+            </div>
+
+            <div className='mt-6 grid'>
+              <button
+                type='submit'
+                className='inline-flex justify-center items-center gap-x-3 text-center bg-blue-600 hover:bg-blue-700 border border-transparent text-sm lg:text-base text-white font-medium rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2 focus:ring-offset-white transition py-3 px-4 dark:focus:ring-offset-gray-800'
+              >
+                Send Inquiry
+              </button>
+            </div>
+          </Form>
+        )}
       </Formik>
       <PredictionModal
         title='Prediction Result'

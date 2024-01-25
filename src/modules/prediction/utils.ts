@@ -23,7 +23,7 @@ export const initialLoanQueryFormData: PredictionPayload = {
   education: '',
   self_employed: '',
   applicantIncome: '',
-  coapplicant_income: '',
+  coapplicant_income: 0,
   loan_amount: '',
   loan_amount_term: '',
   credit_history: '',
@@ -43,21 +43,24 @@ export const predictionValidationSchema = Yup.object().shape({
   ),
   [FIELDS.APPLICANT_INCOME]: Yup.number()
     .min(0, 'Applicant income cannot be negative')
-    .max(15000, 'We are approving loans for low income people only')
+    .max(999999, 'We are approving loans for low income people only')
     .typeError('Applicant income must be a number')
     .required('Applicant income is required'),
-  [FIELDS.CO_APPLICANT_INCOME]: Yup.string()
+  [FIELDS.CO_APPLICANT_INCOME]: Yup.number()
     .min(0, 'Co-applicant income cannot be negative')
-    .max(15000, 'We are approving loans for low income people only')
+    .max(999999, 'We are approving loans for low income people only')
     .typeError('Co-applicant income must be a number')
-    .nullable(),
+    .required('Co-applicant income is required'),
+
   // .required('Co-applicant income is required')
   [FIELDS.LOAN_AMOUNT]: Yup.number()
-    .min(0, 'Loan amount cannot be negative')
+    .min(10000, 'Enter a minimum amount of 10000')
+    .max(250000, 'Exceeded maximum loan amount of 250000')
     .typeError('Loan amount must be a number')
     .required('Loan amount is required'),
   [FIELDS.LOAN_AMOUNT_TERM]: Yup.number()
-    .min(0, 'Loan amount term cannot be negative')
+    .min(4, 'Minimum loan amount term is 12 months')
+    .max(480, 'Maximum loan amount term is 360 months')
     .required('Loan amount term is required'),
   [FIELDS.CREDIT_HISTORY]: Yup.string().required('Credit history is required'),
   [FIELDS.PROPERTY_AREA]: Yup.string().required('Property area is required'),
