@@ -219,7 +219,7 @@ const PredictionForm = () => {
                 {additionalConfiguration === true && (
                   <DropdownSearch
                     dropdown={[
-                      // PredictionMethod.KNNClassifier,
+                      PredictionMethod.KNNClassifier,
                       // PredictionMethod.LogisticRegression,
                       // PredictionMethod.NaiveBayes,
                       PredictionMethod.RandomForestClassifier,
