@@ -5,7 +5,7 @@ export const MEMBERS = [
     name: 'Md Abu Sayed',
     designation: 'Team Leader',
     registrationNo: '2022822010',
-    img: '/asset/img/sayed.png',
+    img: '/asset/img/sayed.jpeg',
     email: 'asayed106@gmail.com',
     phone: '01728047826',
     description: `Hi, I'm MD ABU SAYED,
@@ -52,10 +52,10 @@ export const MEMBERS = [
       'Most of my Work centers around Modeling and Training a Neural Network that could predict the Loan status. I Used python to build the Model. I also bring an understanding of HTML, CSS, and JavaScript in regards to the frontend side of the project.  ',
   },
   {
-    name: 'Fahmida Akter',
+    name: 'Fahmida Afrin',
     designation: 'Programmer',
-    registrationNo: '202282212',
-    img: '/asset/img/dp.jpeg',
+    registrationNo: '2021822018',
+    img: '/asset/img/fahmida.jpeg',
     email: 'afrinfahmida4@gmail.com',
     phone: '+8801730460182',
     description:

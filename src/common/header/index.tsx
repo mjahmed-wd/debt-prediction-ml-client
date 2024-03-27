@@ -67,12 +67,12 @@ const Header = () => {
               >
                 About Us
               </Link>
-              <a
+              {/* <a
                 className='font-medium text-gray-800 hover:text-gray-500 sm:py-6 dark:text-gray-200 dark:hover:text-gray-400'
                 href='#'
               >
                 Modeling Process
-              </a>
+              </a> */}
             </div>
           </div>
         </nav>

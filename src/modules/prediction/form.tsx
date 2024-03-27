@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/inline-script-id */
 import DropdownSearch from 'common/form/dropdownSearch';
 import Input from 'common/form/input';
 import { Form, Formik } from 'formik';
@@ -164,7 +165,7 @@ const PredictionForm = () => {
                   name={FIELDS.LOAN_AMOUNT}
                   label='Loan Amount'
                   type='number'
-                  placeholder='In Thousands'
+                  placeholder='In Actual'
                 />
                 <Input
                   name={FIELDS.LOAN_AMOUNT_TERM}
